@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Walkthrough AI</title>
+
+  <link
+    rel="stylesheet"
+    href="/style.css"
+  />
+</head>
+
+<body>
+
+<header class="topbar">
+
+  <div class="brand">
+
+    <div class="logo">
+      W
+    </div>
+
+    <div>
+      <strong>
+        Walkthrough AI
+      </strong>
+
+      <span>
+        Teach once • Execute live • Pause & Resume
+      </span>
+    </div>
+
+  </div>
+
+
+  <div
+    id="statusPill"
+    class="status-pill idle"
+  >
+    <span></span>
+    READY
+  </div>
+
+</header>
+
+
+<main class="layout">
+
+
+  <!-- ================================================= -->
+  <!-- LEFT WORKSPACE -->
+  <!-- ================================================= -->
+
+  <section class="workspace">
+
+
+    <!-- HERO -->
+
+    <div class="hero">
+
+      <div>
+
+        <div class="eyebrow">
+          AI WORKFLOW AGENT
+        </div>
+
+        <h1>
+          Teach it once.
+          <br>
+
+          <em>
+            Watch it work live.
+          </em>
+        </h1>
+
+        <p>
+          Describe what you want the agent to learn.
+          AI converts your request into a fixed workflow,
+          then dynamically figures out how to execute
+          each step on the real website.
+        </p>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- TEACH -->
+    <!-- ================================================= -->
+
+    <div class="card teach-card">
+
+      <div class="card-header">
+
+        <div>
+
+          <div class="eyebrow">
+            01 • TEACH
+          </div>
+
+          <h2>
+            What do you want me to learn?
+          </h2>
+
+        </div>
+
+        <div class="step-badge">
+          AI → 3–6 steps
+        </div>
+
+      </div>
+
+
+      <textarea
+        id="taskInput"
+        rows="3"
+        placeholder="Example: Find and play the latest song on the T-Series YouTube channel."
+      ></textarea>
+
+
+      <div class="teach-actions">
+
+        <button
+          id="teachBtn"
+          class="primary"
+        >
+          🧠 Teach with AI
+        </button>
+
+        <button
+          id="resetBtn"
+          class="secondary"
+        >
+          Reset
+        </button>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- LEARNED WORKFLOW -->
+    <!-- ================================================= -->
+
+    <div
+      id="workflowBox"
+      class="card workflow-card"
+      style="display:none;"
+    >
+
+      <div class="card-header">
+
+        <div>
+
+          <div class="eyebrow">
+            WORKFLOW LEARNED
+          </div>
+
+          <h2>
+            Fixed execution plan
+          </h2>
+
+        </div>
+
+        <div class="fixed-badge">
+          FIXED
+        </div>
+
+      </div>
+
+
+      <div id="workflowSteps">
+        <!-- AI-generated steps appear here -->
+      </div>
+
+
+      <div class="workflow-footer">
+
+        <div class="workflow-note">
+
+          <span class="check">
+            ✓
+          </span>
+
+          <span>
+            The <strong>what</strong> is fixed.
+            AI will dynamically determine
+            <strong>how</strong> to perform each step.
+          </span>
+
+        </div>
+
+
+        <button
+          id="saveBtn"
+          class="primary"
+        >
+          💾 Save Workflow
+        </button>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- PERFORM -->
+    <!-- ================================================= -->
+
+    <div class="card perform-card">
+
+      <div class="card-header">
+
+        <div>
+
+          <div class="eyebrow">
+            02 • PERFORM
+          </div>
+
+          <h2>
+            Live browser execution
+          </h2>
+
+        </div>
+
+
+        <button
+          id="runBtn"
+          class="primary"
+          disabled
+        >
+          ▶ Run Saved Workflow
+        </button>
+
+      </div>
+
+
+
+      <!-- BROWSER -->
+
+      <div class="browser-card">
+
+        <div class="browser-head">
+
+          <div class="traffic">
+
+            <i></i>
+            <i></i>
+            <i></i>
+
+          </div>
+
+
+          <div
+            id="browserUrl"
+            class="url"
+          >
+            about:blank
+          </div>
+
+
+          <div
+            id="browserStep"
+            class="browser-step"
+          >
+            Waiting
+          </div>
+
+        </div>
+
+
+        <div class="browser-screen">
+
+          <div
+            id="emptyBrowser"
+            class="empty-browser"
+          >
+
+            <div class="browser-icon">
+              ◉
+            </div>
+
+            <h2>
+              Real browser session
+            </h2>
+
+            <p>
+              Run the saved workflow and
+              watch Playwright control a
+              real browser.
+            </p>
+
+          </div>
+
+
+          <img
+            id="browserImage"
+            alt="Live browser session"
+          />
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ================================================= -->
+      <!-- LIVE NARRATION -->
+      <!-- ================================================= -->
+
+      <div class="agent-log">
+
+        <div class="section-title">
+
+          <span>
+            LIVE NARRATION
+          </span>
+
+          <span id="stepCount">
+            0 / 0
+          </span>
+
+        </div>
+
+
+        <div id="activity">
+          <!-- Agent activity appears here -->
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- ================================================= -->
+  <!-- COPILOT -->
+  <!-- ================================================= -->
+
+  <aside class="copilot">
+
+
+    <div class="copilot-head">
+
+      <div class="copilot-avatar">
+        ✦
+      </div>
+
+
+      <div>
+
+        <strong>
+          Walkthrough Copilot
+        </strong>
+
+        <span id="copilotState">
+          Ready to help
+        </span>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- LIVE CONTEXT -->
+
+    <div class="context">
+
+      <div class="context-title">
+        LIVE CONTEXT
+      </div>
+
+
+      <div class="context-row">
+
+        <span>
+          Workflow
+        </span>
+
+        <b id="contextTask">
+          —
+        </b>
+
+      </div>
+
+
+      <div class="context-row">
+
+        <span>
+          Status
+        </span>
+
+        <b id="contextStatus">
+          Ready
+        </b>
+
+      </div>
+
+
+      <div class="context-row">
+
+        <span>
+          Current step
+        </span>
+
+        <b id="contextAction">
+          Waiting
+        </b>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- CHAT -->
+    <!-- ================================================= -->
+
+    <div
+      id="chat"
+      class="chat"
+    >
+
+      <div class="chat-message agent">
+
+        <div class="avatar">
+          ✦
+        </div>
+
+        <div>
+
+          <small>
+            Copilot
+          </small>
+
+          <p>
+            I'm ready. Teach me a workflow,
+            then you can ask me questions
+            while I execute it.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- QUESTION -->
+    <!-- ================================================= -->
+
+    <div class="chat-input">
+
+      <textarea
+        id="questionInput"
+        placeholder="Ask: Why did you pick that video?"
+        rows="3"
+      ></textarea>
+
+
+      <button
+        id="sendBtn"
+      >
+        Ask Copilot ↗
+      </button>
+
+
+      <div class="copilot-hint">
+
+        ⏸ The workflow pauses while I answer,
+        then resumes from the same step.
+
+      </div>
+
+    </div>
+
+
+  </aside>
+
+</main>
+
+
+<script src="/app.js"></script>
+
+</body>
+
+</html>
