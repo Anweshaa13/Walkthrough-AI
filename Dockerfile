@@ -1,15 +1,15 @@
-FROM mcr.microsoft.com/playwright:v1.55.0-noble
+FROM mcr.microsoft.com/playwright:v1.62.1-noble
 
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install --omit=dev
+
+RUN npm ci
 
 COPY . .
 
-ENV PORT=3001
-ENV HEADLESS=true
+ENV NODE_ENV=production
 
-EXPOSE 3001
+EXPOSE 8080
 
 CMD ["node", "server.js"]
